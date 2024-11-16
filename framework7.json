@@ -1,0 +1,18 @@
+{
+  "cwd": "D:\\Projects\\_contests\\fochamp",
+  "type": [
+    "pwa"
+  ],
+  "name": "Fochamp",
+  "framework": "vue",
+  "template": "single-view",
+  "bundler": "vite",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false
+}
