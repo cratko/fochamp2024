@@ -9,6 +9,7 @@ const f7params = {
     store: store,
     // App routes
     routes: routes,
+    darkMode: 'auto',
 
     // Register service worker (only on production build)
     serviceWorker: process.env.NODE_ENV ==='production' ? {
