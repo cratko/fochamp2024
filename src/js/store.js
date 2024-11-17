@@ -29,7 +29,7 @@ const store = createStore({
       state.products = [...state.products, product];
     },
     auth({state}, data) {
-      return fetch('http://90.156.208.88:8080/bryansk/api/auth/authentication', {
+      return fetch('https://api.uapp.space/bryansk/api/auth/authentication', {
         method: "post",
         headers: {
           'Accept': 'application/json',
