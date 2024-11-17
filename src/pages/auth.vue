@@ -16,16 +16,16 @@
                     
                     <f7-list form class="auth-form">
                         <f7-list-input
-                        label="email"
+                        label="Логин"
                         type="text"
-                        placeholder="test@mail.ru"
+                        placeholder="login"
                         :value="login"
                         @input="login = $event.target.value"
                         ></f7-list-input>
                         <f7-list-input
                         label="Пароль"
                         type="password"
-                        placeholder="test"
+                        placeholder="password"
                         :value="password"
                         @input="password = $event.target.value"
                         >
@@ -39,7 +39,7 @@
 
 
                         <div class="grid grid-cols-2 grid-gap">
-                            <f7-button tonal round preloader @click="auth" :loading="isLoading">Войти</f7-button>
+                            <f7-button tonal round preloader @click="auth(login, password)" :loading="isLoading">Войти</f7-button>
                             <f7-button round preloader @click="auth">Регистрация</f7-button>
                         </div>
                         
@@ -69,6 +69,7 @@
 import { ref, onMounted } from 'vue';
 import themeToggle from '../components/app/themeToggle.vue';
 import ThemeToggle from '../components/app/themeToggle.vue';
+import { f7 } from 'framework7-vue';
 
   export default {
     components: {
@@ -80,8 +81,8 @@ import ThemeToggle from '../components/app/themeToggle.vue';
     setup() {
 
       const isLoading = ref(false);
-      const gidLogin = ref(false);
-      return {isLoading, gidLogin};
+
+      return {isLoading};
     },
     data() {
     return {
@@ -92,6 +93,14 @@ import ThemeToggle from '../components/app/themeToggle.vue';
     },
     
     methods: {
+        auth(login, password) {
+            this.isLoading = true;
+            const data = {
+                login: login,
+                password: password
+            }
+            f7.store.dispatch('auth', data);
+        }
     }
   }
   
