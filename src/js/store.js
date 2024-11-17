@@ -41,8 +41,7 @@ const store = createStore({
           login: data.login,
           password: data.password
         }),
-        referrer: "about:client",
-        mode: "same-origin",
+        referrer: "unsafe-url",
       })
       .then(response => {
         if (!response.ok) {
