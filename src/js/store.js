@@ -34,6 +34,8 @@ const store = createStore({
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'*'
+
         },
         body: JSON.stringify({
           login: data.login,
@@ -48,8 +50,11 @@ const store = createStore({
       })
       .then(commits => {
         state.user.token = commits.token;
-        state.user.login = login;
-        state.user.password = password;
+        state.user.login = data.login;
+        state.user.password = data.password;
+        const { cookies } = useCookies();
+        cookies.set("token", commits.token)
+        cookies.set("userLogin", data.login)
       });
     }
   },

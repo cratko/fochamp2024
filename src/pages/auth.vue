@@ -69,7 +69,7 @@
 import { ref, onMounted } from 'vue';
 import themeToggle from '../components/app/themeToggle.vue';
 import ThemeToggle from '../components/app/themeToggle.vue';
-import { f7 } from 'framework7-vue';
+import { f7, f7ready } from 'framework7-vue';
 
   export default {
     components: {
@@ -99,7 +99,24 @@ import { f7 } from 'framework7-vue';
                 login: login,
                 password: password
             }
-            f7.store.dispatch('auth', data);
+            f7.store.dispatch('auth', data)
+            .then(() => {
+                    this.isLoading = false;
+                })
+            .catch(error => {
+                this.isLoading = false;
+                this.notificationFull = f7.notification.create({
+                    icon: '<i class="icon f7-icons">info</i>',
+                    title: 'Ошибка',
+                    titleRightText: 'сейчас',
+                    subtitle: 'Неверный логин или пароль',
+                    text: 'Попробуйте ввести другие данные',
+                    closeTimeout: 3000,
+                    });
+                
+                // Open it
+                this.notificationFull.open();
+            })
         }
     }
   }
