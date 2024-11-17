@@ -41,6 +41,7 @@ const store = createStore({
           login: data.login,
           password: data.password
         }),
+        referrer: "about:client"
       })
       .then(response => {
         if (!response.ok) {
