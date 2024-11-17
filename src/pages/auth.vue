@@ -1,11 +1,7 @@
 <template>
     <f7-page name="auth">
 
-        <f7-navbar class="auth-navbar">
-          <f7-nav-right>
-            <themeToggle></themeToggle>
-          </f7-nav-right>
-        </f7-navbar>
+        <appHeader></appHeader>
         
         <f7-block strong small-inset>
         <f7-login-screen v-model:opened="loginScreenOpened">
@@ -40,7 +36,7 @@
 
                         <div class="grid grid-cols-2 grid-gap">
                             <f7-button tonal round preloader @click="auth(login, password)" :loading="isLoading">Войти</f7-button>
-                            <f7-button round preloader @click="auth">Регистрация</f7-button>
+                            <f7-button round preloader @click="goToRegPage">Регистрация</f7-button>
                         </div>
                         
                         
@@ -67,13 +63,12 @@
 <script>
 
 import { ref, onMounted } from 'vue';
-import themeToggle from '../components/app/themeToggle.vue';
-import ThemeToggle from '../components/app/themeToggle.vue';
+import appHeader from '../components/app/appHeader.vue';
 import { f7, f7ready } from 'framework7-vue';
 
   export default {
     components: {
-        themeToggle
+        appHeader
     },
     props: {
       f7router: Object,
@@ -117,13 +112,18 @@ import { f7, f7ready } from 'framework7-vue';
                 // Open it
                 this.notificationFull.open();
             })
+        },
+        goToRegPage() {
+            f7.view.main.router.navigate("/register", {
+                
+            })
         }
     }
   }
   
 </script>
 
-<style scoped>
+<style>
 .auth-block__title {
     text-align: center;
     padding-bottom: 20px;
@@ -171,9 +171,3 @@ import { f7, f7ready } from 'framework7-vue';
 }
 </style>
 
-<style>
-
-.auth-navbar .navbar-bg {
-    background-color: initial !important;
-}
-</style>
