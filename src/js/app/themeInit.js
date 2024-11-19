@@ -15,6 +15,12 @@ function themeInit() {
         f7.setDarkMode(boolValue);
 
         
+    } else {
+        cookies.set("isDarkTheme", "true")
+
+        const boolValue = (isDarkTheme === "true");
+
+        store.dispatch('setLocalDarkTheme', boolValue)
     }
 }
 

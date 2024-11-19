@@ -7,7 +7,7 @@ function userStatusHandler() {
     console.log("[Handler] userStatusHandler loaded")
 
     if (cookies.isKey("token")) {
-        
+
     } else {
         f7.view.main.router.navigate('/auth/',  {
             reloadCurrent: true

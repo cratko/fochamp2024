@@ -3,7 +3,7 @@ import AuthPage from '../pages/auth.vue';
 import RegisterPage from '../pages/register.vue';
 
 import NotFoundPage from '../pages/404.vue';
-
+import ProfilePage from '../pages/profile.vue';
 var routes = [
   {
     path: '/',
@@ -16,6 +16,10 @@ var routes = [
   {
     path: '/register',
     component: RegisterPage,
+  },
+  {
+    path: '/profile',
+    component: ProfilePage,
   },
   {
     path: '(.*)',

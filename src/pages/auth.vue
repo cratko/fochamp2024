@@ -43,20 +43,24 @@
                     </f7-list>
                     
                     <f7-block class="auth-block__socials auth-block__socials__title">
-                        <f7-block-title>Войти через</f7-block-title>
+                        <!--<f7-block-title>Войти через</f7-block-title>
                         <hr>
                         <div class="auth-block__socials__icons">
                             <img src="../assets/vk.svg"/>
                             <img src="../assets/google.svg"/>
                             <img src="../assets/yandex.ico"/>
-                        </div>
+                        </div> -->
+                        <vkId></vkId>
                     </f7-block>
+
+                    
                     
                 </div>
             </f7-block>
 
         </f7-login-screen>
     </f7-block>
+
     </f7-page>
 </template>
   
@@ -65,10 +69,12 @@
 import { ref, onMounted } from 'vue';
 import appHeader from '../components/app/appHeader.vue';
 import { f7, f7ready } from 'framework7-vue';
+import vkId from '../components/app/vkId.vue';
 
   export default {
     components: {
-        appHeader
+        appHeader,
+        vkId
     },
     props: {
       f7router: Object,
@@ -97,6 +103,10 @@ import { f7, f7ready } from 'framework7-vue';
             f7.store.dispatch('auth', data)
             .then(() => {
                     this.isLoading = false;
+                    f7.view.main.router.navigate('/', {
+                        reloadCurrent: true,
+                        clearPreviousHistory: true
+                    })
                 })
             .catch(error => {
                 this.isLoading = false;
