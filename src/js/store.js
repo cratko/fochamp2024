@@ -12,7 +12,7 @@ const store = createStore({
     isDarkTheme({ state }) {
       return state.localDarkTheme;
     },
-    getUser({ state }) {
+    user({ state }) {
       return state.user;
     }
   },
@@ -60,10 +60,8 @@ const store = createStore({
     userStatusHandler({state}, data) {
       fetch("https://api.uapp.space/bryansk/api/user/me", {
         method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
         headers: {
-            'Authorization': data.token,
+            'Authorization': "Bearer " + data.token,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin':'*'
@@ -75,13 +73,12 @@ const store = createStore({
         return response.json();
       })
       .then(commits => {
-        state.user.token = data.token;
-
-        state.user.login = commits.login;
-        state.user.idRole = commits.idRole;
-        state.user.nameRole = data.nameRole;
-        
-        console.log(state.user.nameRole)
+        state.user = {
+          token: data.token,
+          login: commits.login,
+          idRole: commits.idRole,
+          nameRole: commits.nameRole,
+        }
 
         cookies.set("userLogin", data.login)
       })

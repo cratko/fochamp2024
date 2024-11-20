@@ -1,7 +1,7 @@
 import userStatusHandler from './userStatusHandler';
 import themeInit from './themeInit';
 
-function init() {
+async function init() {
     userStatusHandler()
     themeInit()
 }
