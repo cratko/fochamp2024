@@ -1,21 +1,36 @@
 <template>
   <f7-page name="home">
     <!-- Top Navbar -->
-    <f7-navbar large :sliding="false">
-      <f7-nav-left>
-        <f7-link icon-ios="f7:menu" icon-md="material:menu" panel-open="left"></f7-link>
-      </f7-nav-left>
-      <f7-nav-title sliding>Fochamp</f7-nav-title>
-      <f7-nav-right>
-        <f7-link icon-ios="f7:menu" icon-md="material:menu" panel-open="right"></f7-link>
-      </f7-nav-right>
-      <f7-nav-title-large>Fochamp</f7-nav-title-large>
-    </f7-navbar>
+    <appHeader></appHeader>
+
     <!-- Toolbar-->
     <f7-toolbar bottom>
       <f7-link>Left Link</f7-link>
       <f7-link>Right Link</f7-link>
     </f7-toolbar>
+
+    <f7-block strong-ios outline-ios class="text-align-center">
+      <f7-gauge
+        type="circle"
+        :value="gaugeValue"
+        :size="250"
+        border-color="#2196f3"
+        :border-width="10"
+        :value-text="`${gaugeValue * 100}%`"
+        :value-font-size="41"
+        value-text-color="#2196f3"
+        label-text="amount of something"
+      />
+      <f7-segmented tag="p" raised>
+        <f7-button :active="gaugeValue === 0" @click="() => (gaugeValue = 0)">0%</f7-button>
+        <f7-button :active="gaugeValue === 0.25" @click="() => (gaugeValue = 0.25)">25%</f7-button>
+        <f7-button :active="gaugeValue === 0.5" @click="() => (gaugeValue = 0.5)">50%</f7-button>
+        <f7-button :active="gaugeValue === 0.75" @click="() => (gaugeValue = 0.75)">75%</f7-button>
+        <f7-button :active="gaugeValue === 1" @click="() => (gaugeValue = 1)">100%</f7-button>
+      </f7-segmented>
+    </f7-block>
+
+    <dragTable></dragTable>
     <!-- Page content-->
     <f7-block>
       <p>Here is your blank Framework7 app. Let's see what we have here.</p>
@@ -54,3 +69,12 @@
     </f7-list>
   </f7-page>
 </template>
+
+<script setup>
+import appHeader from '../components/app/appHeader.vue';
+import dragTable from '../components/app/dragTable.vue';
+
+import {ref} from 'vue';
+
+const gaugeValue = ref(0.5);
+</script>

@@ -1,89 +1,68 @@
 <template>
-  <f7-page name="profile" class="grid-demo">
-    <f7-navbar title="Личный кабинет">
-    
-      <div class="grid grid-cols-5 grid-gap" >
-        <div class="col-2"></div>
-        <div class="col-1"></div>
-
-      <f7-button fill popover-open=".popover-menu">Настройки</f7-button>
-          <f7-popover class="popover-menu">
-            <f7-list>
-              <f7-list-item link="/dialog/" popover-close title="Dialog" />
-              <f7-list-item link="/tabs/" popover-close title="Tabs" />
-              <f7-list-item link="/panel/" popover-close title="Side Panels" />
-              <f7-list-item link="/list/" popover-close title="List View" />
-              <f7-list-item link="/inputs/" popover-close title="Form Inputs" />
-            </f7-list>
-          </f7-popover>
-      <f7-button fill popover-open=".popover-menu">Open popover on me</f7-button>
-          <f7-popover class="popover-menu">
-            <f7-list>
-              <f7-list-item link="/dialog/" popover-close title="Dialog" />
-              <f7-list-item link="/tabs/" popover-close title="Tabs" />
-              <f7-list-item link="/panel/" popover-close title="Side Panels" />
-              <f7-list-item link="/list/" popover-close title="List View" />
-              <f7-list-item link="/inputs/" popover-close title="Form Inputs" />
-            </f7-list>
-      </f7-popover>
-      
-    </div>
-
-    </f7-navbar>
+  <f7-page>
+    <f7-navbar title="Profile" back-link="Back"></f7-navbar>
+    <f7-block strong>
+      <div class="profile-page">
+        <div class="profile-page-header">
+          <div class="profile-page-avatar">
+            <img src="../assets/user.png" alt="Profile Picture" class=""/>
+          </div>
+          <div class="profile-page-name">      
+            <f7-chip text="John Doe" media-bg-color="red">
+            <template #media>
+              <f7-icon ios="f7:person" md="material:person" />
+            </template>
+          </f7-chip></div>
+          <div class="profile-page-title"><f7-chip>@johndoe</f7-chip></div>
+        </div>
+      </div>
+    </f7-block>
     <f7-block>
-      <div class="grid grid-cols-1 grid-gap">
-        <div class="col-1">
-          <f7-list menu-list strong-ios outline-ios>
-              <f7-list-item
-                link
-                title="Home"
-                :selected="selected === 'home'"
-                @click="() => (selected = 'home')"
-              >
-                <template #media>
-                  <f7-icon md="material:home" ios="f7:house_fill" />
-                </template>
-              </f7-list-item>
-              <f7-list-item
-                link
-                title="Profile"
-                :selected="selected === 'profile'"
-                @click="() => (selected = 'profile')"
-              >
-                <template #media>
-                  <f7-icon md="material:person" ios="f7:person_fill" />
-                </template>
-              </f7-list-item>
-              <f7-list-item
-                link
-                title="Settings"
-                :selected="selected === 'settings'"
-                @click="() => (selected = 'settings')"
-              >
-                <template #media>
-                  <f7-icon md="material:settings" ios="f7:gear_alt_fill" />
-                </template>
-              </f7-list-item>
-          </f7-list>
+      <p class="profile-page-bio">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </f7-block>
+
+    <f7-block strong large-inset>
+      <f7-block-title >Персональные данные</f7-block-title>
+      <f7-list>
+        <f7-list-item
+          title="Email"
+          after="john.doe@example.com"
+          link="#"
+        >
+          <template #media>
+            <f7-icon material="email"/>
+          </template>
+        </f7-list-item>
+        <f7-list-item
+          title="Номер телефона"
+          after="(123) 456-7890"
+          link="#"
+        >
+        <template #media>
+          <f7-icon material="phone"/>
+        </template>
+        </f7-list-item>
+        <f7-list-item
+          title="Роль"
+          after="New York, USA"
+          link="#"
+        >
+          <template #media>
+            <f7-icon material="group"/>
+          </template>
+        </f7-list-item>
+      </f7-list>
+    </f7-block>
+
+    <f7-block>
+      <div class="row">
+        <div class="col">
+          <f7-button tonal @click="editProfile">Edit Profile</f7-button>
         </div>
-        <div class="col-2">
-          <f7-card
-            title="Card header"
-            content="Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions."
-            footer="Card footer">
-          </f7-card> 
-          <f7-card
-            title="Card header"
-            content="Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions."
-            footer="Card footer">
-          </f7-card>          
-        </div>
-        <div class="col-3">
-          <f7-card
-            title="Card header"
-            content="Card with header and footer. Card headers are used to display card titles and footers for additional information or just for custom actions."
-            footer="Card footer">
-          </f7-card>          
+        <div class="col">
+          <f7-button @click="accountSettings">Account Settings</f7-button>
         </div>
       </div>
     </f7-block>
@@ -91,41 +70,35 @@
 </template>
 
 <script>
-import { f7Navbar, f7Page, f7BlockTitle, f7Block, f7List, f7ListItem, f7Icon,  f7Link,  f7Button, } from 'framework7-vue';
-
 export default {
-  components: {
-    f7Navbar,
-    f7Page,
-    f7BlockTitle,
-    f7Block,
-    f7List,
-    f7ListItem,
-    f7Icon,
-    f7Link,
-    f7Button
-  },
+  methods: {
+    editProfile() {
+      // Handle edit profile action
+    },
+    accountSettings() {
+      // Handle account settings action
+    }
+  }
 };
 </script>
+
 <style scoped>
-.grid-demo .grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 40px;
+.profile-page-avatar {
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
-.grid-demo .col-1 {
-  grid-column: span 1;
-  text-align: center;
+.profile-page-avatar img {
+  max-width: 200px;
 }
 
-.grid-demo .col-2 {
-  grid-column: span 4;
-  text-align: center;
-}
-.grid-demo .col-3 {
-  grid-column: span 2;
-  text-align: center;
+.profile-page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 </style>

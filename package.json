@@ -26,7 +26,8 @@
     "skeleton-elements": "^4.0.1",
     "swiper": "^11.1.14",
     "vue": "^3.5.13",
-    "vue3-cookies": "^1.0.6"
+    "vue3-cookies": "^1.0.6",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.0",

@@ -56,7 +56,36 @@ const store = createStore({
         cookies.set("token", commits.token)
         cookies.set("userLogin", data.login)
       });
-    }
+    },
+    userStatusHandler({state}, data) {
+      fetch("https://api.uapp.space/bryansk/api/user/me", {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+            'Authorization': data.token,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*'
+        }
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Authentication failed');
+        }
+        return response.json();
+      })
+      .then(commits => {
+        state.user.token = data.token;
+
+        state.user.login = commits.login;
+        state.user.idRole = commits.idRole;
+        state.user.nameRole = data.nameRole;
+        
+        console.log(state.user.nameRole)
+
+        cookies.set("userLogin", data.login)
+      })
+      }
   },
 })
 

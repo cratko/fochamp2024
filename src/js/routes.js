@@ -1,6 +1,7 @@
 import HomePage from '../pages/home.vue';
 import AuthPage from '../pages/auth.vue';
 import RegisterPage from '../pages/register.vue';
+import AdminPage from '../pages/admin.vue';
 
 import NotFoundPage from '../pages/404.vue';
 import ProfilePage from '../pages/profile.vue';
@@ -20,6 +21,10 @@ var routes = [
   {
     path: '/profile',
     component: ProfilePage,
+  },
+  {
+    path: '/admin',
+    component: AdminPage,
   },
   {
     path: '(.*)',

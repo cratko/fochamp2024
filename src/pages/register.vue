@@ -40,7 +40,7 @@
     </template>
 
 <script >
-import appHeader from '../components/app/appHeader.vue';
+import appHeader from '../components/app/appHeaderAuth.vue';
 import { f7, f7ready } from 'framework7-vue';
 
 export default {

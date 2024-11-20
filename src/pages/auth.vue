@@ -67,7 +67,7 @@
 <script>
 
 import { ref, onMounted } from 'vue';
-import appHeader from '../components/app/appHeader.vue';
+import appHeader from '../components/app/appHeaderAuth.vue';
 import { f7, f7ready } from 'framework7-vue';
 import vkId from '../components/app/vkId.vue';
 
@@ -104,7 +104,6 @@ import vkId from '../components/app/vkId.vue';
             .then(() => {
                     this.isLoading = false;
                     f7.view.main.router.navigate('/', {
-                        reloadCurrent: true,
                         clearPreviousHistory: true
                     })
                 })
@@ -125,7 +124,7 @@ import vkId from '../components/app/vkId.vue';
         },
         goToRegPage() {
             f7.view.main.router.navigate("/register", {
-                
+                clearPreviousHistory: true
             })
         }
     }
