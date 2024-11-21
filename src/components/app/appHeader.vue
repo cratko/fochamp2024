@@ -3,10 +3,11 @@
         <f7-nav-left>
           <f7-link icon-md="material:home"></f7-link>
         </f7-nav-left>
-        <f7-nav-title>Fochamp | Главная</f7-nav-title>
+        <f7-nav-title class="appHeader-nav-title" subtitle="Главная страница">Fochamp</f7-nav-title>
         <f7-nav-right>
-          <f7-button fill popover-open=".popover-menu" class="action-button" >Настройки</f7-button>
-
+          <f7-button tonal icon-md="material:menu" fill popover-open=".popover-menu" class="action-button" >Меню</f7-button>
+          <f7-button color="blue" strong icon-f7="logo_android" href="https://github.com/cratko/fochamp2024" external class="action-button" >Скачать</f7-button>
+          <f7-button small strong icon-f7="logo_github" href="https://github.com/cratko/fochamp2024" external class="action-button" >GitHub</f7-button>
           <f7-popover class="popover-menu">
             <f7-list class="header-list">
               <f7-list-item class="theme_toggle-item">
@@ -55,6 +56,8 @@ function logout() {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
+
 .theme_toggle-container {
     display: flex;
 }
@@ -70,6 +73,14 @@ function logout() {
 }
 
 .action-button {
-    margin-right: 25px;
+    margin-right: 10px;
+    gap: 5px
+}
+
+.appHeader-nav-title {
+  font-family: "Wix Madefor Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600 !important;
+  font-style: normal;
 }
 </style>
