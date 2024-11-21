@@ -1,13 +1,15 @@
 <template>
-    <f7-navbar>
+    <f7-navbar class="appHeader">
         <f7-nav-left>
-          <f7-link icon-md="material:home"></f7-link>
+          <slot name="nav-left-block">
+
+          </slot>
         </f7-nav-left>
-        <f7-nav-title class="appHeader-nav-title" subtitle="Главная страница">Fochamp</f7-nav-title>
+        <f7-nav-title class="appHeader-nav-title"><a href="/">Fochamp</a><span class="subtitle"><slot name="subtitle-with-icon"></slot></span></f7-nav-title>
         <f7-nav-right>
           <f7-button tonal icon-md="material:menu" fill popover-open=".popover-menu" class="action-button" >Меню</f7-button>
-          <f7-button color="blue" strong icon-f7="logo_android" href="https://github.com/cratko/fochamp2024" external class="action-button" >Скачать</f7-button>
-          <f7-button small strong icon-f7="logo_github" href="https://github.com/cratko/fochamp2024" external class="action-button" >GitHub</f7-button>
+          <f7-button color="blue" strong icon-f7="logo_android" href="https://github.com/cratko/fochamp2024" external class="action-button android-btn" >Скачать</f7-button>
+          <f7-button small strong icon-f7="logo_github" href="https://github.com/cratko/fochamp2024" external class="action-button github-btn" >GitHub</f7-button>
           <f7-popover class="popover-menu">
             <f7-list class="header-list">
               <f7-list-item class="theme_toggle-item">
@@ -23,6 +25,11 @@
               <f7-list-item link="/admin" popover-close title="Администратор" v-if="user.idRole == 1">
                 <template #media>
                   <f7-icon material="admin_panel_settings" />
+                </template>
+              </f7-list-item>
+              <f7-list-item link="https://github.com/cratko/fochamp2024" external popover-close title="Скачать" class="android-btn-list">
+                <template #media>
+                  <f7-icon material="android" />
                 </template>
               </f7-list-item>
               <f7-list-item link="/auth/" popover-close title="Выйти" @click="logout">
@@ -41,11 +48,13 @@
 import themeToggle from './themeToggle.vue';
 import { useCookies } from "vue3-cookies";
 import { useStore } from 'framework7-vue';
+import { inject } from 'vue'
 
 const { cookies } = useCookies();
 
 const user = useStore("user");
 
+const headerSubtitle = inject('headerSubtitle');
 
 
 function logout() {
@@ -83,4 +92,34 @@ function logout() {
   font-weight: 600 !important;
   font-style: normal;
 }
+
+.appHeader-nav-title .subtitle {
+  color: #939393;
+}
+
+.appHeader .navbar-bg {
+  background-color: initial !important;
+}
+
+@media (min-width: 843px) {
+  .appHeader .navbar-inner {
+    padding-left: 120px;
+    padding-right: 120px;
+   }
+
+   .android-btn-list {
+    display: none !important
+  }
+}
+
+@media (max-width: 843px) {
+  .github-btn {
+    display: none !important;
+  }
+
+  .android-btn {
+    display: none !important;
+  }
+}
+
 </style>

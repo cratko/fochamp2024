@@ -1,8 +1,16 @@
 <template>
   <f7-page name="home">
     <!-- Top Navbar -->
-    <appHeader></appHeader>
-
+    <appHeader>
+      <template #nav-left-block>
+        <f7-link icon-md="material:circles_ext" color="blue"></f7-link>
+      </template>
+      
+      <template #subtitle-with-icon>
+        <f7-icon size="14px" material="home"/>
+        Главная страница
+      </template>
+    </appHeader>
     <!-- Toolbar-->
     <f7-toolbar bottom>
       <f7-link>Left Link</f7-link>

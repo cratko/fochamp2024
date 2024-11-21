@@ -1,6 +1,14 @@
 <template>
   <f7-page>
-    <f7-navbar title="Profile" back-link="Back"></f7-navbar>
+    <appHeader>
+      <template #nav-left-block>
+        <f7-link back icon-md="material:arrow_back_ios" color="blue"></f7-link>
+      </template>
+      <template #subtitle-with-icon>
+        <f7-icon size="14px" material="account_circle"/>
+        Профиль
+      </template>
+    </appHeader>
     <f7-block strong>
       <div class="profile-page">
         <div class="profile-page-header">
@@ -70,7 +78,12 @@
 </template>
 
 <script>
+import appHeader from '../components/app/appHeader.vue';
+
 export default {
+  components: {
+    appHeader
+  },
   methods: {
     editProfile() {
       // Handle edit profile action

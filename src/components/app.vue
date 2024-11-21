@@ -6,13 +6,12 @@
 </template>
 
 <script>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, provide } from 'vue';
   import { f7, f7ready, useStore } from 'framework7-vue';
 
   import f7params from '../js/app/config/f7params.js'
   import init from '../js/app/init.js';
 
-  
 
   export default {
     setup() {
