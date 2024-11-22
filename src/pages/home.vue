@@ -1,88 +1,182 @@
+
 <template>
-  <f7-page name="home">
-    <!-- Top Navbar -->
-    <appHeader>
-      <template #nav-left-block>
-        <f7-link icon-md="material:circles_ext" color="blue"></f7-link>
-      </template>
-      
-      <template #subtitle-with-icon>
-        <f7-icon size="14px" material="home"/>
-        Главная страница
-      </template>
-    </appHeader>
-    <!-- Toolbar-->
-    <f7-toolbar bottom>
-      <f7-link>Left Link</f7-link>
-      <f7-link>Right Link</f7-link>
-    </f7-toolbar>
+  <f7-page @page:beforeremove="onPageBeforeRemove" @page:init="onPageInit">
+    
+<appHeader>
+  <template #nav-left-block>
+    <f7-link icon-md="material:circles_ext" color="blue"></f7-link>
+  </template>
+  
+  <template #subtitle-with-icon>
+    <f7-icon size="14px" material="home"/>
+    Главная страница
+  </template>
+</appHeader>
 
-    <f7-block strong-ios outline-ios class="text-align-center">
-      <f7-gauge
-        type="circle"
-        :value="gaugeValue"
-        :size="250"
-        border-color="#2196f3"
-        :border-width="10"
-        :value-text="`${gaugeValue * 100}%`"
-        :value-font-size="41"
-        value-text-color="#2196f3"
-        label-text="amount of something"
+
+    <f7-block-title>Default setup</f7-block-title>
+    <f7-list strong-ios outline-ios>
+      <f7-list-input type="datepicker" placeholder="Your birth date" readonly />
+    </f7-list>
+
+    <f7-block-title>Custom date format</f7-block-title>
+    <f7-list strong-ios outline-ios>
+      <f7-list-input
+        type="datepicker"
+        placeholder="Select date"
+        readonly
+        :calendar-params="{
+          dateFormat: { weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' },
+        }"
       />
-      <f7-segmented tag="p" raised>
-        <f7-button :active="gaugeValue === 0" @click="() => (gaugeValue = 0)">0%</f7-button>
-        <f7-button :active="gaugeValue === 0.25" @click="() => (gaugeValue = 0.25)">25%</f7-button>
-        <f7-button :active="gaugeValue === 0.5" @click="() => (gaugeValue = 0.5)">50%</f7-button>
-        <f7-button :active="gaugeValue === 0.75" @click="() => (gaugeValue = 0.75)">75%</f7-button>
-        <f7-button :active="gaugeValue === 1" @click="() => (gaugeValue = 1)">100%</f7-button>
-      </f7-segmented>
-    </f7-block>
-
-    <dragTable></dragTable>
-    <!-- Page content-->
-    <f7-block>
-      <p>Here is your blank Framework7 app. Let's see what we have here.</p>
-    </f7-block>
-    <f7-block-title>Navigation</f7-block-title>
-    <f7-list strong inset dividersIos>
-      <f7-list-item link="/about/" title="About"></f7-list-item>
-      <f7-list-item link="/form/" title="Form"></f7-list-item>
     </f7-list>
 
-    <f7-block-title>Modals</f7-block-title>
-    <f7-block class="grid grid-cols-2 grid-gap">
-      <f7-button fill popup-open="#my-popup">Popup</f7-button>
-      <f7-button fill login-screen-open="#my-login-screen">Login Screen</f7-button>
-    </f7-block>
-
-    <f7-block-title>Panels</f7-block-title>
-    <f7-block class="grid grid-cols-2 grid-gap">
-      <f7-button fill panel-open="left">Left Panel</f7-button>
-      <f7-button fill panel-open="right">Right Panel</f7-button>
-    </f7-block>
-
-    <f7-list strong inset dividersIos>
-      <f7-list-item
-        title="Dynamic (Component) Route"
-        link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-      ></f7-list-item>
-      <f7-list-item
-        title="Default Route (404)"
-        link="/load-something-that-doesnt-exist/"
-      ></f7-list-item>
-      <f7-list-item
-        title="Request Data & Load"
-        link="/request-and-load/user/123456/"
-      ></f7-list-item>
+    <f7-block-title>Date + Time</f7-block-title>
+    <f7-list strong-ios outline-ios>
+      <f7-list-input
+        type="datepicker"
+        placeholder="Select date and time"
+        readonly
+        :calendar-params="{
+          timePicker: true,
+          dateFormat: {
+            month: 'numeric',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+          },
+        }"
+      />
     </f7-list>
+
+    <f7-block-title>Multiple Values</f7-block-title>
+    <f7-list strong-ios outline-ios>
+      <f7-list-input
+        type="datepicker"
+        placeholder="Select multiple dates"
+        readonly
+        :calendar-params="{ dateFormat: { month: 'short', day: 'numeric' }, multiple: true }"
+      />
+    </f7-list>
+
+    <f7-block-title>Range Picker</f7-block-title>
+    <f7-list strong-ios outline-ios>
+      <f7-list-input
+        type="datepicker"
+        placeholder="Select date range"
+        readonly
+        :calendar-params="{ rangePicker: true }"
+      />
+    </f7-list>
+
+    <f7-block-title>Open in Modal</f7-block-title>
+    <f7-list strong-ios outline-ios>
+      <f7-list-input
+        type="datepicker"
+        placeholder="Select date"
+        readonly
+        :calendar-params="{ openIn: 'customModal', header: true, footer: true }"
+      />
+    </f7-list>
+
+    <f7-block-title>Calendar Page</f7-block-title>
+    <f7-list strong outline-ios>
+      <f7-list-item title="Open Calendar Page" link="/calendar-page/" />
+    </f7-list>
+
+    <f7-block-title>Inline with custom toolbar</f7-block-title>
+    <f7-block strong class="no-padding">
+      <div id="demo-calendar-inline-container"></div>
+    </f7-block>
   </f7-page>
 </template>
-
-<script setup>
+<script>
+import {
+  f7Navbar,
+  f7Page,
+  f7Block,
+  f7BlockTitle,
+  f7List,
+  f7ListInput,
+  f7ListItem,
+  f7,
+} from 'framework7-vue';
+import $ from 'dom7';
 import appHeader from '../components/app/appHeader.vue';
-import dragTable from '../components/app/dragTable.vue';
 
-import {ref} from 'vue';
+export default {
+  components: {
+    f7Navbar,
+    f7Page,
+    f7Block,
+    f7BlockTitle,
+    f7List,
+    f7ListInput,
+    f7ListItem,
+    appHeader
+  },
+  methods: {
+    onPageInit() {
+      const self = this;
 
-const gaugeValue = ref(0.5);
+      // Inline with custom toolbar
+      const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
+      self.calendarInline = f7.calendar.create({
+        containerEl: '#demo-calendar-inline-container',
+        value: [new Date()],
+        renderToolbar() {
+          return `
+              <div class="toolbar calendar-custom-toolbar">
+                <div class="toolbar-inner">
+                  <div class="left">
+                    <a  class="link icon-only"><i class="icon icon-back"></i></a>
+                  </div>
+                  <div class="center"></div>
+                  <div class="right">
+                    <a  class="link icon-only"><i class="icon icon-forward"></i></a>
+                  </div>
+                </div>
+              </div>
+            `.trim();
+        },
+        on: {
+          init(c) {
+            $('.calendar-custom-toolbar .center').text(
+              `${monthNames[c.currentMonth]}, ${c.currentYear}`,
+            );
+            $('.calendar-custom-toolbar .left .link').on('click', () => {
+              self.calendarInline.prevMonth();
+            });
+            $('.calendar-custom-toolbar .right .link').on('click', () => {
+              self.calendarInline.nextMonth();
+            });
+          },
+          monthYearChangeStart(c) {
+            $('.calendar-custom-toolbar .center').text(
+              `${monthNames[c.currentMonth]}, ${c.currentYear}`,
+            );
+          },
+        },
+      });
+    },
+    onPageBeforeRemove() {
+      const self = this;
+      self.calendarInline.destroy();
+    },
+  },
+};
 </script>
