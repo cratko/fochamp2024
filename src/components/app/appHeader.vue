@@ -5,7 +5,7 @@
 
           </slot>
         </f7-nav-left>
-        <f7-nav-title class="appHeader-nav-title"><a href="/">Fochamp</a><span class="subtitle"><slot name="subtitle-with-icon"></slot></span></f7-nav-title>
+        <f7-nav-title class="appHeader-nav-title"><a href="/">Спортотека</a><span class="subtitle"><slot name="subtitle-with-icon"></slot></span></f7-nav-title>
         <f7-nav-right>
           <f7-button tonal icon-md="material:menu" fill popover-open=".popover-menu" class="action-button" >Меню</f7-button>
           <f7-button color="blue" strong icon-f7="logo_android" href="https://github.com/cratko/fochamp2024" external class="action-button android-btn" >Скачать</f7-button>
