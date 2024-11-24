@@ -1,6 +1,6 @@
 <template>
     <f7-list>
-        <f7-list-item checkbox v-model:checked="isOptimised" title="Оптимальный выбор"></f7-list-item>
+        <f7-list-item checkbox v-model:checked="isOptimised" title="Выбрать без пересечений по датам"></f7-list-item>
     </f7-list>
     
     <f7-segmented round tag="p">
