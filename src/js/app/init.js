@@ -1,7 +1,8 @@
 import userStatusHandler from './userStatusHandler';
 import themeInit from './themeInit';
+import getFiltersData from './getFiltersData';
 
-async function init() {
+function init() {
     userStatusHandler()
     themeInit()
 }

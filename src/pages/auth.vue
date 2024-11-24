@@ -50,7 +50,6 @@
                             <img src="../assets/google.svg"/>
                             <img src="../assets/yandex.ico"/>
                         </div> -->
-                        <vkId></vkId>
                     </f7-block>
 
                     

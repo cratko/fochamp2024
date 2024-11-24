@@ -20,7 +20,7 @@ function userStatusHandler() {
         })
         console.log(user.value)
     } else {
-        f7.view.main.router.navigate('/auth/',  {
+        f7.view.main.router.navigate('/',  {
             reloadCurrent: true
         })
     }

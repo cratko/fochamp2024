@@ -6,17 +6,91 @@ const { cookies } = useCookies();
 const store = createStore({
   state: {
     user: {},
-    localDarkTheme: {}
+    localDarkTheme: {},
+    currentFilter: {
+      periodDates: [new Date(), new Date()],
+      calendarSports: [],
+      calendarSportsType: [],
+      ageId: [],
+      sexId: [],
+      disciplineId: [],
+      programId: [],
+      locations: [],
+      team: []
+    },
+    filterResults: [],
+    filterResultsLoading: false
   },
   getters: {
+    allFilter({state}) {
+      return state.currentFilter
+    },
+    filterResultsLoading({state}) {
+      return state.filterResultsLoading
+    },
+    filterResults({state}) {
+      return state.filterResults
+    },
     isDarkTheme({ state }) {
       return state.localDarkTheme;
     },
     user({ state }) {
       return state.user;
+    },
+    currentFilter({state}) {
+      return state.currentFilter
+    },
+    currentPeriodDatesFilter({state}) {
+      return state.currentFilter.periodDates
+    },
+    currentLocation({state}) {
+      return state.currentFilter.locations
+    },
+    currentCalendarSports({state}) {
+      return state.currentFilter.calendarSports
+    },
+    currentCalendarSportsType({state}) {
+      return state.currentFilter.calendarSportsType
+    },
+    currentAgeId({state}) {
+      return state.currentFilter.ageId
+    },
+    currentSexId({state}) {
+      return state.currentFilter.sexId
+    },
+    currentProgramId({state}) {
+      return state.currentFilter.programId
+    },
+    currentDisciplineId({state}) {
+      return state.currentFilter.disciplineId
+    },
+    currentTeam({state}) {
+      return state.currentFilter.team
     }
   },
   actions: {
+    setPeriodDates({state}, arr) {
+      state.currentFilter.periodDates = arr;
+    },
+    setFiltersResultLoading({state}, status) {
+      state.filterResultsLoading = status
+    },
+    setFilter({state}, obj) {
+      state.currentFilter = obj;
+    },
+    clearCurrentFilter({state}) {
+      for (let key in state.currentFilter) {
+        if (Array.isArray(state.currentFilter[key])) {
+          state.currentFilter[key] = []; // Заменяем массив на пустой
+        }
+    }
+    },
+    clearFilterResults({state}) {
+      state.filterResults = []
+    },
+    setFiltersResult({state}, arr) {
+      state.filterResults = arr;
+    },
     setLocalDarkTheme({state}, status) {
       state.localDarkTheme = status;
       cookies.set('isDarkTheme', status);
@@ -78,6 +152,7 @@ const store = createStore({
           login: commits.login,
           idRole: commits.idRole,
           nameRole: commits.nameRole,
+          id: commits.id
         }
 
         cookies.set("userLogin", data.login)

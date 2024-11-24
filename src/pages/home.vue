@@ -1,182 +1,51 @@
-
 <template>
-  <f7-page @page:beforeremove="onPageBeforeRemove" @page:init="onPageInit">
-    
-<appHeader>
-  <template #nav-left-block>
-    <f7-link icon-md="material:circles_ext" color="blue"></f7-link>
-  </template>
-  
-  <template #subtitle-with-icon>
-    <f7-icon size="14px" material="home"/>
-    Главная страница
-  </template>
-</appHeader>
+  <f7-page>
+    <appHeader>
+      <template #nav-left-block>
+        <f7-link icon-md="material:circles_ext" color="blue"></f7-link>
+      </template>
+      <template #subtitle-with-icon>
+        <f7-icon size="14px" material="home"/>
+        Главная страница
+      </template>
+    </appHeader>
+    <div class="grid grid-container grid-gap">
+      
+      <LeftScreen></LeftScreen>
 
+      <f7-block inset strong>
+        <RightScreen></RightScreen>
+      </f7-block>
 
-    <f7-block-title>Default setup</f7-block-title>
-    <f7-list strong-ios outline-ios>
-      <f7-list-input type="datepicker" placeholder="Your birth date" readonly />
-    </f7-list>
-
-    <f7-block-title>Custom date format</f7-block-title>
-    <f7-list strong-ios outline-ios>
-      <f7-list-input
-        type="datepicker"
-        placeholder="Select date"
-        readonly
-        :calendar-params="{
-          dateFormat: { weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' },
-        }"
-      />
-    </f7-list>
-
-    <f7-block-title>Date + Time</f7-block-title>
-    <f7-list strong-ios outline-ios>
-      <f7-list-input
-        type="datepicker"
-        placeholder="Select date and time"
-        readonly
-        :calendar-params="{
-          timePicker: true,
-          dateFormat: {
-            month: 'numeric',
-            day: 'numeric',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-          },
-        }"
-      />
-    </f7-list>
-
-    <f7-block-title>Multiple Values</f7-block-title>
-    <f7-list strong-ios outline-ios>
-      <f7-list-input
-        type="datepicker"
-        placeholder="Select multiple dates"
-        readonly
-        :calendar-params="{ dateFormat: { month: 'short', day: 'numeric' }, multiple: true }"
-      />
-    </f7-list>
-
-    <f7-block-title>Range Picker</f7-block-title>
-    <f7-list strong-ios outline-ios>
-      <f7-list-input
-        type="datepicker"
-        placeholder="Select date range"
-        readonly
-        :calendar-params="{ rangePicker: true }"
-      />
-    </f7-list>
-
-    <f7-block-title>Open in Modal</f7-block-title>
-    <f7-list strong-ios outline-ios>
-      <f7-list-input
-        type="datepicker"
-        placeholder="Select date"
-        readonly
-        :calendar-params="{ openIn: 'customModal', header: true, footer: true }"
-      />
-    </f7-list>
-
-    <f7-block-title>Calendar Page</f7-block-title>
-    <f7-list strong outline-ios>
-      <f7-list-item title="Open Calendar Page" link="/calendar-page/" />
-    </f7-list>
-
-    <f7-block-title>Inline with custom toolbar</f7-block-title>
-    <f7-block strong class="no-padding">
-      <div id="demo-calendar-inline-container"></div>
-    </f7-block>
+    </div>
   </f7-page>
 </template>
-<script>
-import {
-  f7Navbar,
-  f7Page,
-  f7Block,
-  f7BlockTitle,
-  f7List,
-  f7ListInput,
-  f7ListItem,
-  f7,
-} from 'framework7-vue';
-import $ from 'dom7';
+
+<script setup>
 import appHeader from '../components/app/appHeader.vue';
+import LeftScreen from '../components/app/_LeftScreen.vue';
+import { ref } from 'vue';
+import RightScreen from '../components/app/_RightScreen.vue';
 
-export default {
-  components: {
-    f7Navbar,
-    f7Page,
-    f7Block,
-    f7BlockTitle,
-    f7List,
-    f7ListInput,
-    f7ListItem,
-    appHeader
-  },
-  methods: {
-    onPageInit() {
-      const self = this;
+const shortDate = ref([new Date(), new Date()]);
 
-      // Inline with custom toolbar
-      const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-      ];
-      self.calendarInline = f7.calendar.create({
-        containerEl: '#demo-calendar-inline-container',
-        value: [new Date()],
-        renderToolbar() {
-          return `
-              <div class="toolbar calendar-custom-toolbar">
-                <div class="toolbar-inner">
-                  <div class="left">
-                    <a  class="link icon-only"><i class="icon icon-back"></i></a>
-                  </div>
-                  <div class="center"></div>
-                  <div class="right">
-                    <a  class="link icon-only"><i class="icon icon-forward"></i></a>
-                  </div>
-                </div>
-              </div>
-            `.trim();
-        },
-        on: {
-          init(c) {
-            $('.calendar-custom-toolbar .center').text(
-              `${monthNames[c.currentMonth]}, ${c.currentYear}`,
-            );
-            $('.calendar-custom-toolbar .left .link').on('click', () => {
-              self.calendarInline.prevMonth();
-            });
-            $('.calendar-custom-toolbar .right .link').on('click', () => {
-              self.calendarInline.nextMonth();
-            });
-          },
-          monthYearChangeStart(c) {
-            $('.calendar-custom-toolbar .center').text(
-              `${monthNames[c.currentMonth]}, ${c.currentYear}`,
-            );
-          },
-        },
-      });
-    },
-    onPageBeforeRemove() {
-      const self = this;
-      self.calendarInline.destroy();
-    },
-  },
-};
+function test(count) {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const newDate = new Date(currentDate);
+    newDate.setMonth(currentDate.getMonth() + count);
+    shortDate.value = [newDate, newDate]
+}
+
 </script>
+
+<style scoped>
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Определяем две колонки: первая - 1/3, вторая - 2/3 */
+  gap: 20px; /* Отступ между колонками */
+}
+
+</style>

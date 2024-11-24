@@ -9,7 +9,8 @@
         <f7-nav-right>
           <f7-button tonal icon-md="material:menu" fill popover-open=".popover-menu" class="action-button" >Меню</f7-button>
           <f7-button color="blue" strong icon-f7="logo_android" href="https://github.com/cratko/fochamp2024" external class="action-button android-btn" >Скачать</f7-button>
-          <f7-button small strong icon-f7="logo_github" href="https://github.com/cratko/fochamp2024" external class="action-button github-btn" >GitHub</f7-button>
+          <f7-button color="blue" v-if="user.login" strong icon-f7="radiowaves_left" :href="'https://t.me/Bryansk_FSP_Bot?start='+user.id" external class="action-button android-btn" >Уведомления</f7-button>
+
           <f7-popover class="popover-menu">
             <f7-list class="header-list">
               <f7-list-item class="theme_toggle-item">
@@ -17,12 +18,12 @@
                   <themeToggle></themeToggle>
                 </template>
               </f7-list-item>
-              <f7-list-item link="profile" popover-close title="Профиль">
+              <f7-list-item link="profile" popover-close title="Профиль" v-if="user.login">
                 <template #media>
                   <f7-icon material="account_circle" />
                 </template>
               </f7-list-item>
-              <f7-list-item link="/admin" popover-close title="Администратор" v-if="user.idRole == 1">
+              <f7-list-item link="/admin" popover-close title="Администратор" v-if="user.idRole == 2 && user.login">
                 <template #media>
                   <f7-icon material="admin_panel_settings" />
                 </template>
@@ -32,9 +33,15 @@
                   <f7-icon material="android" />
                 </template>
               </f7-list-item>
-              <f7-list-item link="/auth/" popover-close title="Выйти" @click="logout">
+              <f7-list-item link="/auth/" popover-close title="Выйти" @click="logout" v-if="user.login">
                 <template #media>
                   <f7-icon material="logout" color="blue"/>
+                </template>
+              </f7-list-item>
+
+              <f7-list-item link="/auth/" popover-close title="Войти" @click="logout" v-if="!user.login">
+                <template #media>
+                  <f7-icon material="login" color="blue"/>
                 </template>
               </f7-list-item>
             </f7-list>

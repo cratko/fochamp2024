@@ -11,10 +11,10 @@
 
   import f7params from '../js/app/config/f7params.js'
   import init from '../js/app/init.js';
-
-
+  import getFiltersData from '../js/app/getFiltersData.js';
   export default {
     setup() {
+      getFiltersData()
       onMounted(() => {
         f7ready(() => {
           init()
